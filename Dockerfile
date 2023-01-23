@@ -1,4 +1,5 @@
 FROM nginx
 
-RUN echo afternon coffee > /usr/share/nginx/html/index.html
-CMD [ "nginx", "-g", "daemon off;" ]
+COPY start.sh /
+RUN chmod +x /start.sh
+CMD [ "/start.sh" ]
