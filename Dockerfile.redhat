@@ -1,0 +1,4 @@
+FROM redhat/ubi8
+RUN yum install -y nginx
+RUN echo afternoon coffebreak > /usr/share/nginx/html/index.html
+CMD [ "nginx", "-g", "daemon off;" ]
