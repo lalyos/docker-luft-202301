@@ -8,6 +8,7 @@ Docker Essentials Training notes
 ```
 docker run -d \
   --name mydb \
+  --net=blue \
   -e POSTGRES_PASSWORD=secret \
   -v vipdb:/var/lib/postgresql/data \
   -v $PWD/sql:/docker-entrypoint-initdb.d  \
@@ -40,7 +41,8 @@ docker build \
 docker run -d \
   -p 80 \
   -v $PWD:/www  \
-   web:alpine \
+  --net=blue \
+   lalyos/web:alpine \
     httpd -f -v -h /www
 ```
 
