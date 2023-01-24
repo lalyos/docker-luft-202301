@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  mydb:
+    image: postgres:15-alpine
+    environment:
+    - POSTGRES_PASSWORD=secret
+    volumes:
+    - vipdb:/var/lib/postgresql/data
+    - ./sql:/docker-entrypoint-initdb.d
+
+volumes:
+  vipdb:
