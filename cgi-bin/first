@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cat <<EOF
+Content-type: text/html
+
+$(PGPASSWORD=secret psql -h 172.17.0.2 -U postgres -c 'select * from vip' -H)
+EOF
