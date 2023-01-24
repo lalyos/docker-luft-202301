@@ -7,6 +7,14 @@ services:
     volumes:
     - vipdb:/var/lib/postgresql/data
     - ./sql:/docker-entrypoint-initdb.d
+  
+  web:
+    image: web:alpine
+    ports:
+    - 80
+    volumes:
+    - .:/www
+    command: httpd -f -v -h /www
 
 volumes:
   vipdb:
