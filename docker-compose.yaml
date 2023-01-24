@@ -9,13 +9,17 @@ services:
     - ./sql:/docker-entrypoint-initdb.d
   
   web:
-    image: web:alpine
+    #image: web:alpine
+    build:
+      context: .
+      dockerfile: Dockerfile.alpine
+      tags:
+      - web:alpine
+      - lalyos/web:alpine
+
     init: true
     ports:
     - 80
-    volumes:
-    - .:/www
-    command: httpd -f -v -h /www
 
 volumes:
   vipdb:

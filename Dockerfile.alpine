@@ -4,3 +4,8 @@ RUN apk add \
   bash \
   busybox-extras-openrc \
   postgresql15-client 
+
+COPY index.html /www/
+COPY cgi-bin /www/cgi-bin/
+RUN chmod +x /www/cgi-bin/*
+CMD [  "httpd","-f","-v","-h","/www"  ]
