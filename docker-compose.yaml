@@ -1,5 +1,12 @@
 version: '3.9'
 services:
+  proxy:
+    image: nginxproxy/nginx-proxy
+    ports:
+      - 80:80
+    volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+
   mydb:
     image: postgres:15-alpine
     environment:
@@ -18,6 +25,8 @@ services:
       - lalyos/web:alpine
 
     init: true
+    environment:
+      - VIRTUAL_HOST=www.lvh.me
     ports:
     - 80
 
