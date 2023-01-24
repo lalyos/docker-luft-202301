@@ -10,6 +10,7 @@ services:
   
   web:
     image: web:alpine
+    init: true
     ports:
     - 80
     volumes:
