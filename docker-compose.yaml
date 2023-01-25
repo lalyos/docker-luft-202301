@@ -30,6 +30,13 @@ services:
       - 8080
     environment:
       - VIRTUAL_HOST=adminer.${ENV:-dev}.lvh.me
+  
+  pocket:
+    build: pocketbase
+    ports:
+    - 8080
+    environment:
+      - VIRTUAL_HOST=pocket.lvh.me
 
   morning:
     image: lalyos/12factor:v1.1
