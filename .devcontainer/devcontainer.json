@@ -10,14 +10,17 @@
 
 	"mounts": [
 		"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
-		"source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind",
+		//"source=${localEnv:HOME}/.ssh,target=/root/.ssh,type=bind",
+		"source=/c/Users/User/docker-luft-202301,target=/c/Users/User/docker-luft-202301,type=bind",
 		"source=extensions,target=/root/.vscode-server/extensions,type=volume"
 	],
 
-	"workspaceFolder": "${localWorkspaceFolder}",
-	"workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
+	// gitbash: export MSYS_NO_PATHCONV=1
+	// https://github.com/moby/moby/issues/24029#issuecomment-250412919
+	// cd /c/Users/User/docker-luft-202301; docker run -it --rm -v $PWD:$PWD -w $PWD alpine
 
-
+	// "workspaceFolder": "${localWorkspaceFolder}",
+	// "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
 	// "customizations": {
 	// 	// Configure properties specific to VS Code.
 	// 	"vscode": {
