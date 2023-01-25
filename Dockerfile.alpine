@@ -8,4 +8,5 @@ RUN apk add \
 COPY index.html /www/
 COPY cgi-bin /www/cgi-bin/
 RUN chmod +x /www/cgi-bin/*
+RUN dos2unix /www/cgi-bin/*
 CMD [  "httpd","-f","-v","-h","/www"  ]
