@@ -1,11 +1,5 @@
 version: '3.9'
 services:
-  proxy:
-    image: nginxproxy/nginx-proxy
-    ports:
-      - 80:80
-    volumes:
-    - /var/run/docker.sock:/tmp/docker.sock
 
   mydb:
     image: postgres:15-alpine
@@ -26,9 +20,30 @@ services:
 
     init: true
     environment:
-      - VIRTUAL_HOST=www.lvh.me
+      - VIRTUAL_HOST=www.${ENV:-dev}.lvh.me
     ports:
     - 80
 
+  adminer:
+    image: adminer
+    ports:
+      - 8080
+    environment:
+      - VIRTUAL_HOST=adminer.${ENV:-dev}.lvh.me
+
+  morning:
+    image: lalyos/12factor:v1.1
+    environment:
+      - VIRTUAL_HOST=morning.${ENV:-dev}.lvh.me
+      - TITLE=${TITLE:-Good morning DE}
+      - COLOR=${COLOR:-lightgreen}
+      - COLOR2=${COLOR2}
+    ports:
+    - 80
 volumes:
   vipdb:
+
+networks:
+  default:
+    name: infra
+    external: true
