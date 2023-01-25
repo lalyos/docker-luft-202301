@@ -1,0 +1,32 @@
+# syntax=docker/dockerfile:1
+
+FROM alpine:3.17
+
+RUN apk add \
+  bash \
+  busybox-extras-openrc \
+  postgresql15-client
+
+COPY <<"EOD" /www/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Demo</title>
+</head>
+<body>
+    <h2>Tuesday v2</h2>
+   <a href="/cgi-bin/first" target="iframe_sql"  >List vip table</a>
+   <iframe name="iframe_sql"></iframe>
+</body>
+</html>
+EOD
+COPY <<"EOD" /www/cgi-bin/first
+#!/usr/bin/env bash
+
+cat <<EOF
+Content-type: text/html
+
+$(PGPASSWORD=secret psql -h ${DB_HOST:=mydb} -U postgres -c 'select * from vip' -H)
+EOD
+RUN chmod +x /www/cgi-bin/*
+CMD [  "httpd","-f","-v","-h","/www"  ]
